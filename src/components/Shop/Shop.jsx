@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getDb, getStorageData } from "../../utilities/storeData";
 import Cart from "../Cart/Cart";
 import Products from "../Products/Products";
 import "./Shop.css";
@@ -17,8 +18,29 @@ const Shop = () => {
   const handleCart = (product) => {
     const newElement = [...cart, product];
     setCart(newElement);
+
+    getDb(product.key);
   };
-  console.log(cart);
+
+  useEffect(() => {
+    const getLocalData = getStorageData();
+    const newAddedItems = {};
+    if (getLocalData) {
+      const newAddedItems = JSON.parse(getLocalData);
+    }
+    const newCartProduct = [];
+    for (const id in newAddedItems) {
+      const getObj = products.find((product) => product.key === id);
+      if (getObj) {
+        const quantity = newAddedItems[id];
+        getObj.quantity = quantity;
+        newCartProduct.push(getObj);
+      }
+      console.log(getObj);
+    }
+    setCart(newCartProduct);
+  }, [products]);
+
   return (
     <div className="shop-container">
       <div className="products-container">
