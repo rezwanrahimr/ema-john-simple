@@ -27,10 +27,10 @@ const setLocal = (cart) => {
 };
 
 const getStorageData = () => {
-  const localDb = () => localStorage.getItem("cart-info");
-  const db = localDb();
+  const db = localStorage.getItem("cart-info");
   if (db) {
-    return db;
+    const localData = JSON.parse(db);
+    return localData;
   }
 };
 export { getDb, getStorageData };

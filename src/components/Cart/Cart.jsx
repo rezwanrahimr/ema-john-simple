@@ -5,16 +5,19 @@ const Cart = (props) => {
   const { cart } = props;
   let total = 0;
   let shipping = 0;
+  let quantity = 0;
   for (const cartData of cart) {
-    total = total + cartData.price;
-    shipping = shipping + cartData.shipping;
+    // console.log(typeof cartData.price);
+    quantity = quantity + parseFloat(cartData?.quantity);
+    total = parseFloat(cartData.price) * parseFloat(cartData?.quantity);
+    shipping = shipping + cartData?.shipping;
   }
   let totalPrice = total + shipping;
 
   return (
     <div className="cart">
       <h2>Cart OverView: </h2>
-      <p>Products Quantity:{cart.length} </p>
+      <p>Products Quantity:{quantity} </p>
       <p>Total Price: ${total.toFixed(2)}</p>
       <p>Shipping:$ {shipping}</p>
       <p>Total : ${totalPrice}</p>

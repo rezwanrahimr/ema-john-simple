@@ -23,11 +23,10 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    const getLocalData = getStorageData();
-    const newAddedItems = {};
-    if (getLocalData) {
-      const newAddedItems = JSON.parse(getLocalData);
-    }
+    let newAddedItems = getStorageData();
+    // if (getLocalData) {
+    // let  newAddedItems = JSON.parse(getLocalData);
+    // }
     const newCartProduct = [];
     for (const id in newAddedItems) {
       const getObj = products.find((product) => product.key === id);
@@ -36,11 +35,10 @@ const Shop = () => {
         getObj.quantity = quantity;
         newCartProduct.push(getObj);
       }
-      console.log(getObj);
     }
     setCart(newCartProduct);
   }, [products]);
-
+  console.log(cart);
   return (
     <div className="shop-container">
       <div className="products-container">
