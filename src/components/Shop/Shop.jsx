@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import { getDb, getStorageData } from "../../utilities/storeData";
 import Cart from "../Cart/Cart";
 import Products from "../Products/Products";
 import "./Shop.css";
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
+  const productss = useLoaderData();
   const [cart, setCart] = useState([]);
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/ProgrammingHero1/ema-john-simple-resources/master/fakeData/products.JSON"
-    )
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
+  console.log(typeof productss);
 
   const handleCart = (product) => {
     const newElement = [...cart, product];
     setCart(newElement);
-
     getDb(product.key);
   };
 
@@ -29,7 +23,7 @@ const Shop = () => {
     // }
     const newCartProduct = [];
     for (const id in newAddedItems) {
-      const getObj = products.find((product) => product.key === id);
+      const getObj = productss.find((product) => product.key === id);
       if (getObj) {
         const quantity = newAddedItems[id];
         getObj.quantity = quantity;
@@ -37,12 +31,12 @@ const Shop = () => {
       }
     }
     setCart(newCartProduct);
-  }, [products]);
-  console.log(cart);
+  }, []);
+
   return (
     <div className="shop-container">
       <div className="products-container">
-        {products.map((product) => (
+        {productss?.map((product) => (
           <Products
             key={product.key}
             product={product}

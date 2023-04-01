@@ -14,6 +14,7 @@ const Cart = (props) => {
   }
   let totalPrice = total + shipping;
 
+  console.log(cart);
   return (
     <div className="cart">
       <h2>Cart OverView: </h2>
