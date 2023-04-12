@@ -10,7 +10,7 @@ const Header = () => {
         <img src={logo} alt="amazon logo" width={"20%"} />
       </div>
       <div className="header-link">
-        <Link to={"/about"}>About</Link>
+        <Link to={"/"}>Shop</Link>
         <Link to={"/order"}>Order</Link>
         <Link to={"/orderReview"}>Order Review</Link>
         <Link to={"/manageInventories"}>Manage Inventories</Link>
